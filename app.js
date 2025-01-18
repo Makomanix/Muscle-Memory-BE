@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 
 //add routes here app.use('/auth', authRoutes);
 
+//error collection 
 app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500;
@@ -29,7 +30,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect('mongodb+srv://jonathanbruckman:Beauman23!@muscle-memory.6qkts.mongodb.net/')
+  .connect('mongodb+srv://jonathanbruckman:Beauman23!@muscle-memory.6qkts.mongodb.net/muscle-memory')
   .then(result => {
     app.listen(8080);
   })
