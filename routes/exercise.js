@@ -3,18 +3,18 @@ import { body, check } from 'express-validator';
 
 const router = express.Router();
 
-router.get('/exercises', );
+router.get('/', );
 
-router.get('/exercises/:exerciseId', );
+router.post('/', );
 
-router.get('/exercises/:primary', );
+router.get('/:exerciseId', );
 
-router.get('/exercises/:secondary', )
+router.get('/:primary', );
 
-router.post('/exercises', );
+router.get('/:secondary', )
 
-router.patch('/exercises/:exerciseId', );
+router.patch('/:exerciseId', );
 
-router.delete('/exercises', );
+router.delete('/:exerciseId', );
 
 export default router;

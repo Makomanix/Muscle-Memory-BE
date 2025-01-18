@@ -1,8 +1,12 @@
-import part from 'path';
+import path from 'path';
 
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
+
+import authRoutes from './routes/auth';
+import exerciseRoutes from './routes/exercise';
+import workoutRoutes from './routes/workout';
 
 const app = express();
 
@@ -18,6 +22,9 @@ app.use((req, res, next) => {
 })
 
 //add routes here app.use('/auth', authRoutes);
+app.use('/auth', authRoutes);
+app.use('/exercises', exerciseRoutes);
+app.use('/workouts', workoutRoutes);
 
 //error collection 
 app.use((error, req, res, next) => {

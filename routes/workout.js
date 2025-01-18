@@ -3,21 +3,21 @@ import { body, check } from 'express-validator';
 
 const router = express.Router();
 
-router.get('/workouts', );
+router.get('/', );
 
-router.post('/workouts', );
+router.post('/', );
 
-router.get('/workouts/:workoutId', );
+router.get('/:workoutId', );
 
-router.patch('/workouts/:workoutId', );
+router.patch('/:workoutId', );
 
-router.delete('/workouts/:workoutId', );
+router.delete('/:workoutId', );
 
-router.get('/workouts/:type', );
+router.get('/:type', );
 
-router.get('/workouts/sessions', );
+router.get('/sessions', );
 
-router.get('/workouts/:workoutId/sessions', );
+router.get('/:workoutId/sessions', );
 
-router.get('/workouts/:workoutId/sessions/sessionId', );
+router.get('/:workoutId/sessions/:sessionId', );
 export default router;
