@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-
+//setting headers
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -38,6 +38,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({message: message, data: data});
 });
 
+//server connection
 mongoose
   .connect(DB_CONNECTION_STRING)
   .then(result => {
