@@ -4,9 +4,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
 
-import authRoutes from './routes/auth';
-import exerciseRoutes from './routes/exercise';
-import workoutRoutes from './routes/workout';
+import authRoutes from './routes/auth.js';
+import exerciseRoutes from './routes/exercise.js';
+import workoutRoutes from './routes/workout.js';
+
+import 'dotenv/config'
 
 const app = express();
 
@@ -37,7 +39,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect('mongodb+srv://jonathanbruckman:Beauman23!@muscle-memory.6qkts.mongodb.net/muscle-memory')
+  .connect(DB_CONNECTION_STRING)
   .then(result => {
     app.listen(8080);
   })
