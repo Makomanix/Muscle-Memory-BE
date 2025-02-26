@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const sessionSchema = new Schema(
@@ -57,7 +57,7 @@ const workoutSchema = new Schema(
 
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
     },
@@ -75,7 +75,6 @@ const userSchema = new Schema(
     }],
     image: {
       type: String,
-      required: true
     },
     height: {
       type: String,
@@ -90,6 +89,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
 
-export default User;

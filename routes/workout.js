@@ -1,5 +1,7 @@
-import express from 'express';
-import { body, check } from 'express-validator';
+const express = require('express')
+const { body, check } = require('express-validator');
+
+const authController = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -20,4 +22,5 @@ router.get('/sessions', );
 router.get('/:workoutId/sessions', );
 
 router.get('/:workoutId/sessions/:sessionId', );
-export default router;
+
+module.exports = router;

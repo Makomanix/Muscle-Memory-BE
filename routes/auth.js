@@ -1,5 +1,7 @@
-import express from 'express';
-import { body, check } from 'express-validator';
+const express = require('express');
+const { body, check } = require('express-validator');
+
+const authController = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -18,7 +20,7 @@ body('email')
 body('password')
   .trim()
   .isLength({min: 7})
-  .matches(/^(?=.*[!@#$%^&*])/)
+  .matches(/[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/)
   .withMessage('Minimum length 7 and must include 1 special character.'),
 body('username')
   .trim()
@@ -29,4 +31,4 @@ body('username')
 
 router.post('/login', authController.login );
 
-export default router;
+module.exports = router;

@@ -1,8 +1,9 @@
-import { validationResult } from "express-validator";
-import { hash, compare } from "bcrypt";
-import User from "../models/user";
+const { validationResult } = require('express-validator')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const jwt = require("jsonwebtoken");
+const User = require('../models/user')
+
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
 exports.signup = (req, res, next) => {
@@ -14,14 +15,14 @@ exports.signup = (req, res, next) => {
     throw error;
   }
   const email = req.body.email;
-  const name = req.body.name;
+  const username = req.body.username;
   const password = req.body.password;
   bcrypt
     .hash(password, 12)
     .then(hashedPw => {
       const user = new User({
         email: email,
-        name: name,
+        username: username,
         password: hashedPw,
       });
       return user.save();

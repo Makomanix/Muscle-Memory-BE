@@ -1,16 +1,16 @@
-import path from 'path';
+const path = require('path');
 
-import express from 'express';
-import mongoose from 'mongoose';
-import multer from 'multer';
+const express = require('express');
+const mongoose = require('mongoose');
+const multer = require('multer');
 
-import authRoutes from './routes/auth.js';
-import exerciseRoutes from './routes/exercise.js';
-import workoutRoutes from './routes/workout.js';
-
-import 'dotenv/config'
+const authRoutes = require('./routes/auth')
+const exerciseRoutes = require('./routes/exercise.js');
+const workoutRoutes = require('./routes/workout.js');
 
 const app = express();
+
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))

@@ -1,5 +1,5 @@
-import express from 'express';
-import { body, check } from 'express-validator';
+const express = require('express')
+const { body, check } = require('express-validator');
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.patch('/:exerciseId', );
 
 router.delete('/:exerciseId', );
 
-export default router;
+module.exports = router;
