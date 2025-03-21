@@ -55,16 +55,24 @@ exports.login = (req, res, next) => {
       const token = jwt.sign(
         {
           email: loadedUser.email,
-          userId: loadedUser._id.toString(),
+          role: loadedUser.role,
+          userId: loadedUser._id.toString()
         }, JWT_SECRET_KEY,
         { expiresIn: '1h'}
       );
-      res.status(200).json({ token: token, userId: loadedUser._id.toString() });
+      console.log(loadedUser);
+      res.status(200).json({ 
+        token: token, 
+        userId: loadedUser._id.toString(), 
+        username: loadedUser.username, 
+        email: loadedUser.email,
+        role: loadedUser.role
+      });
     })
-    .catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
+    .catch(error => {
+      if (!error.statusCode) {
+        error.statusCode = 500;
       }
-      next(err);
+      next(error);
     })
 }
