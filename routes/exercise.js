@@ -3,18 +3,18 @@ const { body, check } = require('express-validator');
 
 const router = express.Router();
 
-router.get('/', );
+router.get('/', isAuth );
 
-router.post('/', );
+router.post('/', isAuth, isAdmin );
 
-router.get('/:exerciseId', );
+router.get('/:exerciseId', isAuth );
 
-router.get('/:primary', );
+router.get('/:primary', isAuth);
 
-router.get('/:secondary', )
+router.get('/:secondary', isAuth)
 
-router.patch('/:exerciseId', );
+router.patch('/:exerciseId', isAuth, isAdmin);
 
-router.delete('/:exerciseId', );
+router.delete('/:exerciseId', isAuth, isAdmin);
 
 module.exports = router;
