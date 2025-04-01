@@ -76,3 +76,7 @@ exports.login = (req, res, next) => {
       next(error);
     })
 }
+
+exports.getUser = (req, res, next) => {
+  
+}
