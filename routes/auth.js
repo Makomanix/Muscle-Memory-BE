@@ -33,6 +33,10 @@ router.put('/signup', [
 
 router.post('/login', authController.login);
 
-router.get('/user', isAuth, authController.getUser)
+router.get('/user', isAuth, authController.getUser);
+
+router.get('/refresh', authController.refreshToken);
+
+router.get('logout', authController.logout);
 
 module.exports = router;

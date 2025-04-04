@@ -61,7 +61,7 @@ exports.login = (req, res, next) => {
         { expiresIn: '1h'}
       );
       res.cookie('token', token, {
-        maxAge: 86400000,
+        maxAge: 60 * 1 * 1000,
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
