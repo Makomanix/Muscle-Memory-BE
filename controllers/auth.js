@@ -60,6 +60,13 @@ exports.login = (req, res, next) => {
         }, JWT_SECRET_KEY,
         { expiresIn: '1h'}
       );
+      res.cookie('token', token, {
+        maxAge: 86400000,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+        path: '/login',
+      });
       console.log(loadedUser);
       res.status(200).json({ 
         token: token, 
