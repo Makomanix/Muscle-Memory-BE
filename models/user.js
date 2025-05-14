@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const REFRESH_SECRET_KEY = process.env.REFRESH_SECRET_KEY;
 const ACCESS_SECRET_KEY = process.env.ACCESS_SECRET_KEY;
+const REFRESH_SECRET_KEY = process.env.REFRESH_SECRET_KEY;
+
 
 const sessionSchema = new Schema(
   {
@@ -94,12 +95,12 @@ const userSchema = new Schema(
     workouts: [{
       type: workoutSchema,
     }],
-    refreshToken: [String],
+    refreshTokens: [String],
   },
   { timestamps: true }
 );
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthTokens = function () {
   const accessToken = jwt.sign(
     { _id: this._id },
     ACCESS_SECRET_KEY,
@@ -108,7 +109,7 @@ userSchema.methods.generateAuthToken = function () {
   const refreshToken = jwt.sign(
     { _id: this._id },
     REFRESH_SECRET_KEY,
-    { expiresIn: "1d" }
+    { expiresIn: "7d" }
   );
 
   const tokens = { accessToken: accessToken, refreshToken: refreshToken };

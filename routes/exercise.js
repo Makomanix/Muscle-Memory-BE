@@ -17,15 +17,15 @@ router.post(
     body('name')
       .trim()
       .isLength({min: 3, max: 20})
-      .withMessage('Name group must be between 3 and 12 characters long'),
+      .withMessage('Name must be between 3 and 12 characters long'),
     body('primaryMuscle')
       .notEmpty()
       .isLength({min: 3, max: 12})
-      .withMessage('Muscle group must be between 3 and 12 characters long'),
+      .withMessage('Primary muscle group must be between 3 and 12 characters long'),
     body('secondaryMuscle')
       .notEmpty()
       .isLength({min: 3, max: 12})
-      .withMessage('Muscle group must be between 3 and 12 characters long'),
+      .withMessage('Secondary muscle group must be between 3 and 12 characters long'),
     body('url')
       .isURL()
       .withMessage('Must be valid URL')
