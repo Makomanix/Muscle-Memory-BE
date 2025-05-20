@@ -164,6 +164,7 @@ exports.getAccess = (req, res, next) => {
       });
       res.status(200).json({
         success: true,
+        status: 200,
         message: 'Authentication tokens refreshed successfully.'
       });
       console.log("success")

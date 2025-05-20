@@ -6,10 +6,8 @@ const Exercise = require('../models/exercise')
 exports.getExercises = (req, res, next) => {
   Exercise.find()
     .then(exercises => {
-      res.status(200).json({
-        message: 'Fetched exercises successfully.',
-        exercises: exercises
-      })
+      console.log(exercises);
+      res.status(200).json(exercises)
     })
     .catch(error => {
       if (!error.statusCode) {
