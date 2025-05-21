@@ -83,7 +83,7 @@ exports.patchExercise = (req, res, next) => {
 
       return foundExercise.save();
     })
-    .then(savedExercise => {
+    .then(result => {
       res.status(201).json({ message: 'Exercise Updated!'})
     })
     .catch(error => {
@@ -95,5 +95,21 @@ exports.patchExercise = (req, res, next) => {
 };
 
 exports.deleteExercise = (req, res, next) => {
+  const id = req.body.id;
+  Exercise.findByIdAndDelete(id)
+    .then(deletedExercise => {
+      if (!deletedExercise) {
+        const error = new Error('Exercise not found');
+        error.statusCode = 404;
+        throw error;
+      }
 
-}
+      res.status(200).json({message: 'Exercise deleted successfully'})
+    })
+    .catch(error => {
+      if (!error.statusCode) {
+        error.statusCode = 500;
+      }
+      next(error);
+    });
+};
