@@ -12,7 +12,7 @@ exports.signup = (req, res, next) => {
     const error = new Error('Validation Failed');
     error.statusCode = 422;
     error.data = errors.array();
-    throw error;
+    return next(error);
   }
 
   let tokens;
@@ -51,6 +51,12 @@ exports.signup = (req, res, next) => {
         domain: 'api.mm.local'
       });
       res.status(201).json({ message: 'User Created!'})
+    })
+    .catch(error => {
+      if(!error.statusCode) {
+        error.statusCode = 500;
+      }
+      next(error);
     })
 };
 
@@ -135,7 +141,7 @@ exports.getAccess = (req, res, next) => {
         const error = new Error('Unauthorize. No matching user found.');
         error.statusCode = 401
         console.log('I AM HERE')
-        throw error;
+        return next(error);
       }
       tokens = currentUser.generateAuthTokens();
       currentUser.refreshTokens = currentUser.refreshTokens.filter((token) => token !== refreshCookie);

@@ -49,13 +49,9 @@ app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
-  // console.log('status', status);
-  // console.log('error 123', error);
-  // console.log('data', data);
-  // console.log('message', message);
-  const details = data?.map((detail) => {
-    return detail.msg;
-  })
+  const details = Array.isArray(data) 
+    ? data.map((detail) => detail.msg).filter(Boolean)
+    : undefined
   // console.log("details", details);
   res.status(status).json({message: message, details: details, data: data});
 });

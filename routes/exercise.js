@@ -7,7 +7,11 @@ const exerciseController = require('../controllers/exercise');
 
 const router = express.Router();
 
-router.get('/', isAuth, exerciseController.getExercises);
+router.get(
+  '/', 
+  isAuth, 
+  exerciseController.getExercises
+);
 
 router.post(
   '/', 
@@ -17,20 +21,51 @@ router.post(
     body('name')
       .trim()
       .isLength({min: 3, max: 20})
-      .withMessage('Name must be between 3 and 12 characters long'),
+      .withMessage('Name must be between 3 and 20 characters long'),
     body('primaryMuscle')
       .notEmpty()
-      .isLength({min: 3, max: 12})
-      .withMessage('Primary muscle group must be between 3 and 12 characters long'),
+      .isLength({min: 3, max: 20})
+      .withMessage('Primary muscle group must be between 3 and 20 characters long'),
     body('secondaryMuscle')
       .notEmpty()
-      .isLength({min: 3, max: 12})
-      .withMessage('Secondary muscle group must be between 3 and 12 characters long'),
+      .isLength({min: 3, max: 20})
+      .withMessage('Secondary muscle group must be between 3 and 20 characters long'),
     body('url')
       .isURL()
       .withMessage('Must be valid URL')
   ], 
   exerciseController.createExercise 
+);
+
+router.patch(
+  '/', 
+  isAuth,
+  isAdmin,
+  [
+    body('name')
+      .trim()
+      .isLength({min: 3, max: 20})
+      .withMessage('Name must be between 3 and 20 characters long'),
+    body('primaryMuscle')
+      .notEmpty()
+      .isLength({min: 3, max: 20})
+      .withMessage('Primary muscle group must be between 3 and 20 characters long'),
+    body('secondaryMuscle')
+      .notEmpty()
+      .isLength({min: 3, max: 20})
+      .withMessage('Secondary muscle group must be between 3 and 20 characters long'),
+    body('url')
+      .isURL()
+      .withMessage('Must be valid URL')
+  ],
+  exerciseController.patchExercise
+);
+
+router.delete(
+  '/', 
+  isAuth,
+  isAdmin,
+  exerciseController.deleteExercise
 );
 
 router.get('/:exerciseId', isAuth );
@@ -39,8 +74,5 @@ router.get('/:primary', isAuth);
 
 router.get('/:secondary', isAuth)
 
-// router.patch('/:exerciseId', isAuth, isAdmin);
-
-// router.delete('/:exerciseId', isAuth, isAdmin);
 
 module.exports = router;
