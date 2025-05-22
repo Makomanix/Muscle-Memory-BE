@@ -49,10 +49,6 @@ const workoutSchema = new Schema(
       ref: 'Exercise',
       required: true
     }],
-    creator: {
-      type: String,
-      required: true
-    },
     sessions: [{
       type: sessionSchema
     }]
