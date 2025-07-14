@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/', isAuth, workoutController.getWorkouts);
 
-// router.post('/', isAuth, workoutController.createWorkout);
+router.post('/', isAuth, workoutController.createWorkout);
 
 // router.get('/:workoutId', isAuth, workoutController);
 

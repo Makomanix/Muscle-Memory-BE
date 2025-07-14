@@ -68,7 +68,7 @@ exports.login = (req, res, next) => {
   let tokens;
   User.findOne({email: email})
     .then(user => {
-      if(!user) {
+      if (!user) {
         const error = new Error('No user could be found with this email.');
         error.statusCode = 401;
         throw error;
@@ -152,6 +152,7 @@ exports.getAccess = (req, res, next) => {
       return currentUser.save()
     })
     .then(savedUser => {
+      //add check for 
       res.cookie('jwtRefresh', tokens.refreshToken, {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
