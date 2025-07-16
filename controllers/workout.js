@@ -92,5 +92,44 @@ exports.deleteWorkout = (req, res, next) => {
 };
 
 exports.patchWorkout = (req, res, next) => {
+  const errors = validationResult(req);
+  if ( !errors.isEmpty() ) {
+    const error = new Error('Validation failed, entered data is incorrect.')
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
+  };
+  const userId = req.userId;
+  const workoutId = req.body.workoutId;
+  const newWorkout = req.body.newWorkout;
 
+  User.findById(userId)
+  .then(user => {
+    if ( !user ) {
+      const error = new Error('User not found.');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const workout = user.workouts.id(workoutId);
+
+    if ( !workout ) {
+      const error = new Error('Workout not found.');
+      error.statusCode = 404;
+      throw error;
+    }
+    
+    Object.assign(workout, newWorkout);
+
+    return user.save();
+  })
+  .then(updatedUser => {
+    return res.json({ message: 'Workout edited successfully'})
+  })
+  .catch(error => {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error)
+  })
 };

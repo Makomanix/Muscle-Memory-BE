@@ -37,24 +37,24 @@ router.post(
 // router.get('/:workoutId', isAuth, workoutController);
 
 router.patch(
-  '/:workoutId',
+  '/',
   isAuth,
   [
-    body('title')
+    body('newWorkout.title')
       .trim()
       .notEmpty()
       .isLength({max: 20})
       .withMessage('Title length must be between 1 and 20 characters.'),
-    body('type')
+    body('newWorkout.type')
       .notEmpty()
       .withMessage('Workout type is missing.'),
-    body('image')
+    body('newWorkout.image')
       .notEmpty()
       .withMessage('Workout image is missing.'),
-    body('exercises')
+    body('newWorkout.exercises')
       .isArray({min: 1})
       .withMessage('Workouts must have at least 1 exercise.'),
-    body('sessions')
+    body('newWorkout.sessions')
       .isArray()
       .withMessage('Workout is missing sessions.')
   ],
