@@ -55,8 +55,40 @@ exports.createWorkout = (req, res, next) => {
 };
 
 exports.deleteWorkout = (req, res, next) => {
+  const userId = req.userId;
+  const workoutId = req.body.workoutId;
+  let originalWorkoutCount;
+  console.log('req.body', req.body)
+  console.log('workoutId', workoutId)
 
-  User.findOneAndUpdate()
+  User.findById(userId)
+  .then(user => {
+    if ( !user ) {
+      const error = new Error('User not found.');
+      error.statusCode = 404;
+      throw error;
+    }
+    originalWorkoutCount = user.workouts.length;
+    
+    return User.findOneAndUpdate(
+      { _id: userId },
+      { $pull: { workouts: { _id: workoutId }}},
+      { new: true }
+    );
+  })
+  .then(updatedUser => {
+    if ( updatedUser.workouts.length === originalWorkoutCount ) {
+      const error = new Error('Workout not found.');
+      error.statusCode = 404;
+    }  
+    return res.json({ message: 'Workout deleted successfully'})
+  })
+  .catch(error => {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error)
+  })
 };
 
 exports.patchWorkout = (req, res, next) => {

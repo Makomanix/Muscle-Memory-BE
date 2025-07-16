@@ -61,7 +61,7 @@ router.patch(
   workoutController.patchWorkout
 );
 
-router.delete('/:workoutId', isAuth, workoutController.deleteWorkout);
+router.delete('/', isAuth, workoutController.deleteWorkout);
 
 // router.get('/:type', isAuth);
 
