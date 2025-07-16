@@ -18,7 +18,6 @@ exports.getExercises = (req, res, next) => {
 };
 
 exports.createExercise = (req, res, next) => {
-  const body = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error('Validation failed, entered data is incorrect.');
@@ -26,7 +25,7 @@ exports.createExercise = (req, res, next) => {
     error.data = errors.array();
     console.log('Am i here?')
     throw error;
-  }
+  };
   const name = req.body.name;
   const primary = req.body.primaryMuscle;
   const secondary = req.body.secondaryMuscle;
@@ -67,7 +66,7 @@ exports.patchExercise = (req, res, next) => {
     error.data = errors.array();
     console.log('Am i here?')
     throw error;
-  }
+  };
   Exercise.findById(id)
     .then(foundExercise => {
       console.log('foundExercise', foundExercise);
@@ -102,7 +101,7 @@ exports.deleteExercise = (req, res, next) => {
         const error = new Error('Exercise not found');
         error.statusCode = 404;
         throw error;
-      }
+      };
 
       res.status(200).json({message: 'Exercise deleted successfully'})
     })
